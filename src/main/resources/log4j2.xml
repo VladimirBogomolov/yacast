@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+    <Properties>
+        <Property name="logpath">.</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="FILE" fileName="${logpath}/log/yacast.log"
+                     filePattern="${logpath}/log/yacast-%d{MM-dd-yyyy}.log">
+            <DefaultRolloverStrategy max="10"/>
+            <PatternLayout>
+                <Pattern>[%d{dd/MM/yy hh:mm:ss:sss z}] %5p %c{1} %M: %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{dd/MM/yy hh:mm:ss:sss z}] %5p %c{2}: %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="YandexCastBot" level="DEBUG"/>
+        <Logger name="YandexCastClient" level="DEBUG"/>
+        <Logger name="TelegramBot" level="DEBUG"/>
+        <ROOT level="INFO">
+            <Appender-ref ref="FILE"/>
+            <Appender-ref ref="CONSOLE"/>
+        </ROOT>
+
+    </Loggers>
+</Configuration>
